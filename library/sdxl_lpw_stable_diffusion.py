@@ -343,13 +343,13 @@ def get_weighted_text_embeddings(
             uncond_weights = [[1.0] * len(token) for token in uncond_tokens]
 
     # round up the longest length of tokens to a multiple of (model_max_length - 2)
-    max_length = max([len(token) for token in prompt_tokens])
+    max_length = max([len(token) for token in prompt_tokens]) if prompt_tokens else 0
     if uncond_prompt is not None:
-        max_length = max(max_length, max([len(token) for token in uncond_tokens]))
+        max_length = max(max_length, max([len(token) for token in uncond_tokens]) if uncond_tokens else 0)
 
     max_embeddings_multiples = min(
         max_embeddings_multiples,
-        (max_length - 1) // (pipe.tokenizer.model_max_length - 2) + 1,
+        (max_length - 1) // (pipe.tokenizer.model_max_length - 2) + 1 if max_length > 0 else 1,
     )
     max_embeddings_multiples = max(1, max_embeddings_multiples)
     max_length = (pipe.tokenizer.model_max_length - 2) * max_embeddings_multiples + 2
@@ -358,9 +358,10 @@ def get_weighted_text_embeddings(
     bos = pipe.tokenizer.bos_token_id
     eos = pipe.tokenizer.eos_token_id
     pad = pipe.tokenizer.pad_token_id
+    
     prompt_tokens, prompt_weights = pad_tokens_and_weights(
-        prompt_tokens,
-        prompt_weights,
+        prompt_tokens or [[]],  # Ensure prompt_tokens is not None
+        prompt_weights or [[]],  # Ensure prompt_weights is not None
         max_length,
         bos,
         eos,
@@ -369,10 +370,11 @@ def get_weighted_text_embeddings(
         chunk_length=pipe.tokenizer.model_max_length,
     )
     prompt_tokens = torch.tensor(prompt_tokens, dtype=torch.long, device=pipe.device)
+    
     if uncond_prompt is not None:
         uncond_tokens, uncond_weights = pad_tokens_and_weights(
-            uncond_tokens,
-            uncond_weights,
+            uncond_tokens or [[]],  # Ensure uncond_tokens is not None
+            uncond_weights or [[]],  # Ensure uncond_weights is not None
             max_length,
             bos,
             eos,
