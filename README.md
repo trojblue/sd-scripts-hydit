@@ -9,7 +9,6 @@ env setup:
 conda env create --file environment_hydit_kohya.yml
 conda activate hydit-kohya
 ```
-
 model setup:
 ```bash
 
@@ -32,8 +31,6 @@ inference with hunyuan dit:
 ```bash
 python hunyuan_inference_gui.py
 ```
-
-
 
 
 
