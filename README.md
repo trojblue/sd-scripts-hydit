@@ -7,11 +7,12 @@ Usage: use togher with https://github.com/trojblue/kohya_ss_hydit.
 env setup:
 ```bash
 conda env create --file environment_hydit_kohya.yml
+conda activate hydit-kohya
 ```
 
 inference with hunyuan dit:
 ```bash
-python ./sd-scripts/hunyuan_inference_gui.py
+python hunyuan_inference_gui.py
 ```
 
 
