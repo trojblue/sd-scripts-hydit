@@ -9,6 +9,10 @@ env setup:
 conda env create --file environment_hydit_kohya.yml
 ```
 
+inference with hunyuan dit:
+```bash
+python ./sd-scripts/hunyuan_inference_gui.py
+```
 
 
 # Original README
