@@ -4,7 +4,42 @@
 Usage: use togher with https://github.com/trojblue/kohya_ss_hydit.
 
 
+env setup:
+```bash
+conda env create --file environment_hydit_kohya.yml
+conda activate hydit-kohya
+```
+model setup:
+```bash
 
+# getting hunyuan dit pretrain, in kohya format
+mkdir -p /lv0/kohya_ss_hydit/models/
+cd /lv0/kohya_ss_hydit/models/
+cp -r /rmd/yada/model_weights/hydit_v1.2_kohya .
+
+# getting fientuned checkpoints to inference
+mkdir -p /lv0/kohya_ss_hydit/checkpoints
+cd /lv0/kohya_ss_hydit/checkpoints
+cp /rmd/yada/checkpoints/hydit_run2_164k/last-step00000500.ckpt .
+```
+
+
+inference with hunyuan dit:
+- model_path: `/lv0/kohya_ss_hydit/models/hydit_v1.2_kohya/t2i`
+- ckpt_path: `/lv0/kohya_ss_hydit/checkpoints/last-step00000500.ckpt`
+
+```bash
+python hunyuan_inference_gui.py
+```
+
+
+
+
+<br>
+
+---
+
+<br>
 
 
 # Original README
