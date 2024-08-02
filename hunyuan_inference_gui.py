@@ -41,7 +41,7 @@ def inference_by_lycoris(prompt, neg_prompt, height, weight, steps, cfg_scale, s
 fintune_options = ["Dreambooth"]
 version_options = ["1.1", "1.2"]
 
-DEFAULT_NEG = "worst quality, bad quality, 错误的眼睛，糟糕的人脸，毁容，糟糕的艺术，变形，多余的肢体，模糊的颜色，模糊，重复，病态，残缺"
+DEFAULT_NEG = "lowres, worst quality, bad quality, messy, chaotic, 2000s, blurry, bad anatomy, extra digits, abstract, lowres, wrong eyes, bad face, disfigurement, bad art, deformation, extra limbs, blurry colors,  repetition, pathological, incomplete, lowres, worst, bad, average"
 
 iface = gr.Interface(
     process_selection,
@@ -53,8 +53,8 @@ iface = gr.Interface(
         gr.Number(label="weight", value=768),
         gr.Number(label="steps", value=40),
         gr.Number(label="cfg_scale", value=5),
-        gr.Number(label="seed", value=287816226),
-        gr.Textbox(label="model_path", value="/lv0/kohya_ss_hydit/models/hydit_v1.2_kohya/t2i"),
+        gr.Number(label="seed", value=8888),
+        gr.Textbox(label="model_path", value="/lv0/hydit_v1.2_kohya/t2i"),
         gr.Textbox(label="ckpt_path", value="/lv0/kohya_ss_hydit/checkpoints/last-step00002000.ckpt"),
         gr.Radio(choices=version_options, label="HunYuanDiT version", value="1.2"),
     ],
