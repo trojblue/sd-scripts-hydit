@@ -7,8 +7,6 @@ Usage: use togher with https://github.com/trojblue/kohya_ss_hydit.
 
 
 
-
-
 # Original README
 
 This repository contains training, generation and utility scripts for Stable Diffusion.
